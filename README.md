@@ -6,8 +6,8 @@ Let's say we have 3 LANs
 - VLAN 20 name TWENTY size 512, has PC2 and PC3
 ### LAN 2 192.168.10.0/25
 - VLAN 1 size 128, has PC0 and PC4
-### LAN 3 10.0.8.0/22
-- VLAN 1 size 128, has PC0 and PC4
+### LAN 3 192.168.20.0/24
+- VLAN 100 size 256, has PC0 and PC4
 
 ## How to step by step configure a LAN
 
@@ -19,7 +19,7 @@ type into your switch for example in LAN 1 for PC0:
 
     vlan 10
 
-        name 10
+        name TEN
 
     int fa0/1
 
@@ -48,7 +48,7 @@ type into your router for example in LAN 1 for vlan 20:
 
         no shutdown
 
-### 5. Set your default gateway to your computer. For example PC0 in VLAN 10 in LAN 1 will have a default gateway of <b>10.0.10.1</b>
+### 5. Set your default gateway in your computer. For example PC0 in VLAN 10 in LAN 1 will have a default gateway of <b>10.0.10.1</b>
 
 ### <p style="color: #ef4b45">6. Do the previous steps for all LANs</p>
 
@@ -67,5 +67,5 @@ ip route 192.168.10.0 255.255.255.128 100.100.100.102
 ### 8. Now you can try pinging between networks
 For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
-ping 10.0.8.10
+ping 192.168.20.10
 ```
