@@ -31,7 +31,7 @@ type into your switch for example in LAN 1 for PC0:
 
 type into your switch for example in LAN 1:
 
-    int gi0/1
+    int gi0/0
 
         switchport mode trunk
 
@@ -40,7 +40,7 @@ type into your switch for example in LAN 1:
 ### 4. Set subports for a port from your <b>router</b>
 type into your router for example in LAN 1 for vlan 20:
 
-    int gi0/1.20
+    int gi0/0.20
 
         encapsulation dot1Q
 
@@ -50,21 +50,36 @@ type into your router for example in LAN 1 for vlan 20:
 
 ### 5. Set your default gateway in your computer. For example PC0 in VLAN 10 in LAN 1 will have a default gateway of <b>10.0.10.1</b>
 
-### <p style="color: #ef4b45">6. Do the previous steps for all LANs</p>
-
-### 7. Set network addresses to static table
+### 6. Set network adresses to ports in your router
 - Let's say that between LAN 1 and LAN 2 we choose a connection with an ip of 100.100.100.100/30
 - Router of LAN 1 will have an ip adress of 100.100.100.101/30 and the router of LAN 2 will have an ip of 100.100.100.102/30
+
+Set the gi0/1 to be the port that is connected to the remote router.
+
+    int gi0/1
+
+        ip address 100.100.100.101 255.255.255.252
+
+And in the router on the other side we set the same thing but the other ip address
+
+    int gi0/1
+
+        ip address 100.100.100.102 255.255.255.252
+
+### 7. Set network addresses to static table
+
 the command for setting a network address is:
 ```
 ip route [remote_network_ip] [rem_net_mask] [net_connection_ip]
 ```
-So if we take that and use it in our example, its gonna be:
+So if we take that and use it in our example, on router 1 its gonna be:
 ```
 ip route 192.168.10.0 255.255.255.128 100.100.100.102
 ```
 
-### 8. Now you can try pinging between networks
+### <p style="color: #ef4b45">8. Do the previous steps for all LANs</p>
+
+### 9. Now you can try pinging between networks
 For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
 ping 192.168.20.10
