@@ -10,8 +10,11 @@ Let's say we have 3 LANs
 - VLAN 1 size 128, has PC0 and PC4
 
 ## How to step by step configure a LAN
-#### 1. Set IP adresses to all computers
-#### 2. Add VLANs to your switches and add the PSs to the VLANS
+
+### 1. Set IP adresses to all computers
+
+### 2. Add VLANs to your switches and add the PSs to the VLANS
+
 type into your switch for example in LAN 1 for PC0:
 
     vlan 10
@@ -24,7 +27,7 @@ type into your switch for example in LAN 1 for PC0:
 
     switchport access vlan 10
 
-#### 3. Set trunk between your switch and router
+### 3. Set trunk between your switch and router
 
 type into your switch for example in LAN 1:
 
@@ -34,7 +37,7 @@ type into your switch for example in LAN 1:
 
     switchport access vlan 10,20
 
-#### 4. Set subports for a port from your <b>router</b>
+### 4. Set subports for a port from your <b>router</b>
 type into your router for example in LAN 1 for vlan 20:
 
     int gi0/1.20
@@ -42,11 +45,12 @@ type into your router for example in LAN 1 for vlan 20:
     encapsulation dot1Q
 
     ip address 192.168.8.1
-#### 5. Set your default gateway to your computer. For example PC0 in VLAN 10 in LAN 1 will have a default gateway of <b>10.0.10.1</b>
 
-### <p style="color: #AA0000">6. Do the previous steps for all LANs</p>
+### 5. Set your default gateway to your computer. For example PC0 in VLAN 10 in LAN 1 will have a default gateway of <b>10.0.10.1</b>
 
-#### 7. Set network addresses to static table
+### <p style="color: #ef4b45">6. Do the previous steps for all LANs</p>
+
+### 7. Set network addresses to static table
 - Let's say that between LAN 1 and LAN 2 we choose a connection with an ip of 100.100.100.100/30
 - Router of LAN 1 will have an ip adress of 100.100.100.101/30 and the router of LAN 2 will have an ip of 100.100.100.102/30
 the command for setting a network address is:
