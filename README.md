@@ -84,6 +84,41 @@ For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
 ping 192.168.20.10
 ```
+
+<hr>
+
+# How to configure OSPF and RIP on a router
+## RIP:
+### 1. Set RIP on the router
+```
+router rip
+```
+### 2. Configure local network
+```
+network 192.168.10.1
+```
+### 3. Configure remote network
+```
+network 10.0.10.0
+```
+## OSPF:
+### 1. Set RIP on the router
+```
+router ospf 1
+```
+### 2. Set interface to the switch
+```
+passive-interface gi0/0
+```
+### 3. Configure local network(s) and use inverted mask
+```
+network 192.168.10.1 0.0.0.255
+```
+### 4. Configure remote network (the connection IP) and use inverted mask
+```
+network 200.200.200.0 0.0.0.3
+```
+
 <hr>
 
 # How to configure SSH on a router/switch
