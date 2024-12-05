@@ -84,3 +84,56 @@ For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
 ping 192.168.20.10
 ```
+
+# How to configure SSH on a router/switch
+
+### 1. Set ip address to vlan on a switch and to a port on a router
+Switch:
+```
+int vlan [number]
+    ip address 192.168.10.1 255.255.255.0
+    no sh
+```
+Router:
+```
+int gi0/0
+    ip address 192.168.10.1 255.255.255.0
+    no sh
+```
+### 2. Set hostnames
+```
+hostname admin
+ip domain name admin
+```
+
+### 3. Generate crypto key
+```
+crypto key generate rsa
+```
+
+### 4. Set a password and username
+Enable password:
+```
+enable password admin
+```
+Local password:
+```
+username admin password admin
+```
+
+### 5. Set ssh version
+```
+connect ssh version 2
+```
+
+### 6. Enable VTY line for communication
+```
+line vty 0 15
+transport input ssh
+login local
+```
+
+### 7. Connect to router/switch via computer
+```
+ssh -l admin 192.168.10.1
+```
