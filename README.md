@@ -84,6 +84,7 @@ For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
 ping 192.168.20.10
 ```
+<hr>
 
 # How to configure SSH on a router/switch
 
