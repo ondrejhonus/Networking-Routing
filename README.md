@@ -102,7 +102,7 @@ network 192.168.10.1
 network 10.0.10.0
 ```
 ## OSPF:
-### 1. Set RIP on the router
+### 1. Set OSPF on the router
 ```
 router ospf 1
 ```
