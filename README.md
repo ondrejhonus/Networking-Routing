@@ -1,6 +1,14 @@
 # How to configure connections between networks
 
-Let's say we have 3 LANs
+## Table of contents
+1. **[LAN Configuration](#how-to-step-by-step-configure-a-lan)**
+2. **[OSPF and RIP Configuration](#how-to-configure-ospf-and-rip-on-a-router)**
+3. **[SSH Configuration](#how-to-configure-ssh-on-a-router-switch)**
+4. **[NAT Configuration](#how-to-configure-nat-on-a-static-config)**
+<hr>
+
+### Let's say we have 3 LANs
+
 ### LAN 1 10.0.8.0/22
 - VLAN 10 name TEN size 128, has PC0 and PC1
 - VLAN 20 name TWENTY size 512, has PC2 and PC3
@@ -173,3 +181,41 @@ login local
 ```
 ssh -l admin 192.168.10.1
 ```
+
+
+# How to configure NAT on a STATIC config
+## 1. DO NOT SET A DEFAULT GATEWAY TO YOUR INTERNET SERVER
+### 2. Add a **default route** to all external routers
+```
+ip route 0.0.0.0 0.0.0.0 [next_hop]
+```
+
+### 3. Set a NAT direction to the border router (the one connected to the internet)
+```
+int g0/0
+    ip nat [inside/outside]
+```
+
+### 4. Turn on the NAT service for translating local adresses
+- #### Set the [number] to set the group number that can access the internet
+- #### Set g0/x as the port connected to the internet
+```
+ip nat inside source list [number] interface g0/x overloaded
+```
+
+### Set up the access-list (use the [number] from the previous step)
+- Basic - 1-99
+- Advanced - 100-199
+### To DENY the access to internet for a specific address
+```
+access-list [number] deny [ip_address] [wild_mask]
+```
+#### example:
+```
+access-list 33 deny 192.168.0.0 0.0.1.255
+```
+### To ALLOW the access to internet for the rest of the network
+```
+access-list [number] deny any
+``` 
+
