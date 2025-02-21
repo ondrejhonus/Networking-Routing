@@ -257,3 +257,18 @@ access-list 33 deny 192.168.0.0 0.0.1.255
 access-list [number] deny any
 ``` 
 
+# Port forwarding
+## We will Allow TPD / UDP ports on the border router to access the e-shop server from the internet
+> Step 1., 2., 3. FROM NAT HAVE to be done to do this
+## 1. Open a port on the border router that is pointing to the e-shop server
+```
+ip nat inside source static tcp [source_local_ip] [port] [global_ip]
+```
+For example for HTTPS:
+```
+ip nat inside source static tcp 192.168.2.100 443 213.200.13.200 443
+```
+And for example for HTTP:
+```
+ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
+```
