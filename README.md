@@ -272,3 +272,8 @@ And for example for HTTP:
 ```
 ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 ```
+#### Useful ports
+- HTTPS: 443
+- HTTP: 80
+- SSH: 22
+- FTP: 20 & 21
