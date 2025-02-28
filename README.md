@@ -2,11 +2,12 @@
 
 ## Table of contents
 1. **[LAN Configuration](#how-to-step-by-step-configure-a-lan)**
-2. **[OSPF and RIP Configuration](#how-to-configure-ospf-and-rip-on-a-router)**
-3. **[SSH Configuration](#how-to-configure-ssh-on-a-router-switch)**
-4. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
-5. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
-6. **[Port Forwarding](#port-forwarding)**
+2. **[Static Routing](#static-routing)**
+3. **[OSPF and RIP Configuration](#how-to-configure-ospf-and-rip-on-a-router)**
+4. **[SSH Configuration](#how-to-configure-ssh-on-a-router-switch)**
+5. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
+6. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
+7. **[Port Forwarding](#port-forwarding)**
 
 <hr>
 
@@ -20,7 +21,7 @@
 ### LAN 3 192.168.20.0/24
 - VLAN 100 size 256, has PC0 and PC4
 
-## How to step by step configure a LAN
+# How to step by step configure a LAN
 
 ### 1. Set IP adresses to all computers
 
@@ -77,9 +78,9 @@ And in the router on the other side we set the same thing but the other ip addre
 
         ip address 100.100.100.102 255.255.255.252
 
-### 7. Set network addresses to static table
+# Static Routing
 
-the command for setting a network address is:
+1. ### Add networks to the static table
 ```
 ip route [remote_network_ip] [rem_net_mask] [net_connection_ip]
 ```
@@ -90,7 +91,7 @@ ip route 192.168.10.0 255.255.255.128 100.100.100.102
 
 ### <p style="color: #ef4b45">8. Do the previous steps for all LANs</p>
 
-### 9. Now you can try pinging between networks
+### 2. Now you can try pinging between networks
 For example from PC0 in LAN 1, ping PC4 in LAN 3
 ```
 ping 192.168.20.10
