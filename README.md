@@ -5,7 +5,8 @@
 2. **[OSPF and RIP Configuration](#how-to-configure-ospf-and-rip-on-a-router)**
 3. **[SSH Configuration](#how-to-configure-ssh-on-a-router-switch)**
 4. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
-4. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
+5. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
+6. **[Port Forwarding](#port-forwarding)**
 
 <hr>
 
