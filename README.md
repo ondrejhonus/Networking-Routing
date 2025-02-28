@@ -251,16 +251,25 @@ access-list [number] deny any
 ## 1. DO NOT SET A DEFAULT GATEWAY TO YOUR INTERNET SERVER
 ### 2. Add a **default route** ONLY ON THE BORDER ROUTER
 ```
-ip route 0.0.0.0 0.0.0.0 [next_hop]
+ip route 0.0.0.0 0.0.0.0 [Internet_ip]
 ```
 
-### 3. Set a NAT direction on the border router (the one connected to the internet)
+### 3. Set a NAT direction on the border router to all ports (the one connected to the internet)
 ```
-int g0/0
+int g0/X
     ip nat [inside/outside]
 ```
 
-### 4. Turn on the NAT service for translating local adresses ON THE BORDER ROUTER
+
+### 4. Send the information to the other routers
+```
+router ospf [ospf_pid]
+```
+```
+default-information originate
+```
+
+### 5. Turn on the NAT service for translating local adresses ON THE BORDER ROUTER
 - #### Set the [number] to set the group number that can access the internet
 - #### Set g0/x as the port connected to the internet
 ```
