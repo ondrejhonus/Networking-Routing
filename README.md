@@ -5,9 +5,10 @@
 2. **[Static Routing](#static-routing)**
 3. **[OSPF and RIP Configuration](#how-to-configure-ospf-and-rip-on-a-router)**
 4. **[SSH Configuration](#how-to-configure-ssh-on-a-router-switch)**
-5. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
-6. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
-7. **[Port Forwarding](#port-forwarding)**
+5. **[DHCP Config](#setup-dhcp)**
+6. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
+7. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
+8. **[Port Forwarding](#port-forwarding)**
 
 <hr>
 
@@ -115,8 +116,9 @@ network 10.0.10.0
 ```
 ## OSPF:
 ### 1. Set OSPF on the router
+> prolly do this on all your routers
 ```
-router ospf 1
+router ospf [pid]
 ```
 ### 2. Set interface to the switch
 ```
@@ -124,11 +126,11 @@ passive-interface gi0/0
 ```
 ### 3. Configure local network(s) and use inverted mask
 ```
-network 192.168.10.1 0.0.0.255
+network 192.168.10.1 0.0.0.255 area [area_num]
 ```
 ### 4. Configure remote network (the connection IP) and use inverted mask
 ```
-network 200.200.200.0 0.0.0.3
+network 200.200.200.0 0.0.0.3 area [area_num]
 ```
 
 <hr>
@@ -186,6 +188,28 @@ login local
 ssh -l admin 192.168.10.1
 ```
 
+# Setup DHCP
+### exclude adresses for servers and routers
+```
+ip dhcp excluded-adress [from_ip] [to_ip]
+```
+```
+ip dhcp pool [vlan]
+```
+```
+network [vlan_ip] [mask]
+```
+```
+default-router [router_ip]
+```
+### set helper address on second router
+#### go into sub port
+```
+int g0/X.XX
+```
+```
+ip helper-address [ip]
+```
 
 # How to configure NAT on a STATIC config
 ## 1. DO NOT SET A DEFAULT GATEWAY TO YOUR INTERNET SERVER
