@@ -273,7 +273,7 @@ default-information originate
 - #### Set the [number] to set the group number that can access the internet
 - #### Set g0/x as the port connected to the internet
 ```
-ip nat inside source list [number] interface g0/x overloaded
+ip nat inside source list [number] interface g0/[internet port num] overloaded
 ```
 
 ### Set up the access-list (use the [number] from the previous step)
@@ -289,7 +289,7 @@ access-list 33 deny 192.168.0.0 0.0.1.255
 ```
 ### To ALLOW the access to internet for the rest of the network
 ```
-access-list [number] deny any
+access-list [number] permit any
 ``` 
 
 # Port forwarding
