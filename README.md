@@ -244,7 +244,7 @@ access-list 33 deny 192.168.0.0 0.0.1.255
 ```
 ### To ALLOW the access to internet for the rest of the network
 ```
-access-list [number] deny any
+access-list [number] permit any
 ``` 
 
 # How to configure NAT on a DYNAMIC config
