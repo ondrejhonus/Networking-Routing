@@ -247,6 +247,19 @@ access-list 33 deny 192.168.0.0 0.0.1.255
 access-list [number] permit any
 ``` 
 
+### Add the internet port to the access group to out
+```
+int gig0/[internet_port]
+    access-group [ACL num] out
+``` 
+
+### Add the inside ports to the access group to in
+```
+int gig0/[neighbor ports]
+    access-group [ACL num] in
+``` 
+
+
 # How to configure NAT on a DYNAMIC config
 ## 1. DO NOT SET A DEFAULT GATEWAY TO YOUR INTERNET SERVER
 ### 2. Add a **default route** ONLY ON THE BORDER ROUTER
@@ -290,6 +303,18 @@ access-list 33 deny 192.168.0.0 0.0.1.255
 ### To ALLOW the access to internet for the rest of the network
 ```
 access-list [number] permit any
+```
+
+### Add the internet port to the access group to out
+```
+int gig0/[internet_port]
+    access-group [ACL num] out
+``` 
+
+### Add the inside ports to the access group to in
+```
+int gig0/[neighbor ports]
+    access-group [ACL num] in
 ``` 
 
 # Port forwarding
