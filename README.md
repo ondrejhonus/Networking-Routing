@@ -337,3 +337,49 @@ ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 - HTTP: 80
 - SSH: 22
 - FTP: 20 & 21
+
+# Access-list
+### A list of rules, that allows and denies network communication
+> Useful website: https://samuraj-cz.com/clanek/cisco-ios-8-acl-access-control-list/
+
+### There's already some info on ACL in **[NAT Static](#how-to-configure-nat-on-a-static-config)**, but il prolly repeat it
+
+### Show cmd: ```show ip access-list```
+
+### Rule handling : 
+- from top to bottom
+- Allow something, deny the rest (or the other way around)
+
+### Where can i apply:
+- VLANs
+- physical ports
+- SSH (```access class <num> in```)
+- NAT (```ip nat inside source list <num>```, also **[HERE](#how-to-configure-nat-on-a-static-config)**)
+- port-forwarding (**[HERE](#port-forwarding)**)
+
+> info: its ISO 2., 3., 4. layer
+
+### What number to choose:
+- 1-99 - basic ACL (limited by source addresses)
+- 100-199 - extended ACL (it watches the __source, destination address__ and the __soft port__)
+
+### VLAN (not that important, just do this on the port)
+in an L3 switch:
+```
+vlan access-map NOT-TO-SERVER 10
+```
+
+### Physical port ACL
+int:
+```
+int gig0/X
+    ip access-group <num> in/out
+```
+or also in subint:
+```
+int gig0/X.X
+    ip access-group <num> in/out
+```
+
+### Port-forwarding ACL
+- It's already in the main command there's already a __source, destination address defined__ and also the **port** you're forwarding
