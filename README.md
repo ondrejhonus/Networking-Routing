@@ -9,6 +9,7 @@
 6. **[NAT Static](#how-to-configure-nat-on-a-static-config)**
 7. **[NAT Dyamic](#how-to-configure-nat-on-a-dynamic-config)**
 8. **[Port Forwarding](#port-forwarding)**
+9. **[Access-list](#access-list)**
 
 <hr>
 
@@ -344,7 +345,7 @@ ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 
 ### There's already some info on ACL in **[NAT Static](#how-to-configure-nat-on-a-static-config)**, but il prolly repeat it
 
-### Show cmd: ```show ip access-list```
+### Show cmd: ```show access-list```
 
 ### Rule handling : 
 - from top to bottom
@@ -379,6 +380,11 @@ or also in subint:
 ```
 int gig0/X.X
     ip access-group <num> in/out
+```
+
+### SSH ([How to config SSH](#ssh-how-to-config-ssh))
+```
+access-class <num> in
 ```
 
 ### Port-forwarding ACL
