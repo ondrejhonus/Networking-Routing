@@ -339,11 +339,11 @@ ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 - SSH: 22
 - FTP: 20 & 21
 
-# Access-list
+# Access-list (ACL)
 ### A list of rules, that allows and denies network communication
 > Useful website: https://samuraj-cz.com/clanek/cisco-ios-8-acl-access-control-list/
 
-### There's already some info on ACL in **[NAT Static](#how-to-configure-nat-on-a-static-config)**, but il prolly repeat it
+### There's already some info on ACL in **[NAT Static](#how-to-configure-nat-on-a-static-config)**, but il prolly repeat it3  
 
 ### Show cmd: ```show access-list```
 
@@ -364,11 +364,29 @@ ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 - 1-99 - basic ACL (limited by source addresses)
 - 100-199 - extended ACL (it watches the __source, destination address__ and the __soft port__)
 
+### Extended ACL
+```
+ip access-list extended acl-XX
+    # allow ping
+    permit icmp 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255 echo
+    # deny everything else
+    90 deny ip any any
+    # allow replying to pings
+    33 permit icmp 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255 echo-reply
+```
+exit
+
 ### VLAN (not that important, just do this on the port)
 in an L3 switch:
-```
+<!-- ```
 vlan access-map NOT-TO-SERVER 10
+``` -->
 ```
+int vlanXX
+    ip access-group acl-X in
+```
+
+
 
 ### Physical port ACL
 int:
@@ -383,9 +401,13 @@ int gig0/X.X
 ```
 
 ### SSH ([How to config SSH](#ssh-how-to-config-ssh))
+
 ```
-access-class <num> in
+line vty 0 15
+    access-class <num> in
 ```
 
 ### Port-forwarding ACL
 - It's already in the main command there's already a __source, destination address defined__ and also the **port** you're forwarding
+
+
