@@ -354,7 +354,7 @@ ip nat inside source static tcp 192.168.2.100 80 213.200.13.200 80
 ### Where can i apply:
 - VLANs
 - physical ports
-- SSH (```access class <num> in```)
+- SSH (```access class <num> in```), Use standard ACL
 - NAT (```ip nat inside source list <num>```, also **[HERE](#how-to-configure-nat-on-a-static-config)**)
 - port-forwarding (**[HERE](#port-forwarding)**)
 
@@ -376,19 +376,28 @@ ip access-list extended acl-XX
 ```
 exit
 
+or for example to allow HTTPS
+in ip access-list extended acl-XX
+```
+30 permit tcp 192.168.10.0 0.0.0.255 host 192.168.11.132 eq 443
+```
+
+or FTP:
+```
+40 permit tcp 192.168.10.0 0.0.0.255 host 192.168.11.132 eq 21
+50 permit tcp 192.168.10.0 0.0.0.255 host 192.168.11.132 gt 1023
+```
+
 ### VLAN (not that important, just do this on the port)
 in an L3 switch:
-<!-- ```
-vlan access-map NOT-TO-SERVER 10
-``` -->
 ```
 int vlanXX
     ip access-group acl-X in
 ```
 
-
-
 ### Physical port ACL
+#### DO THE **EXTENDED ACL** BEFORE THIS!
+
 int:
 ```
 int gig0/X
@@ -401,7 +410,7 @@ int gig0/X.X
 ```
 
 ### SSH ([How to config SSH](#ssh-how-to-config-ssh))
-
+Use standard ACL, not extended
 ```
 line vty 0 15
     access-class <num> in
